@@ -1,7 +1,6 @@
 // Contains the routes on the '/api' path
 const express = require('express');
-const mongoose = require('mongoose')
-const ShortUrl = require('../models/short-url')
+const ShortUrl = require('../models/short-url');
 const router = express.Router();
 
 // POST /api/shorturl
@@ -64,7 +63,7 @@ router.get("/shorturl/:short_url", async (req, res) => {
 
 // Functions
 function isValidUrl(inputValue) {
-    const urlPattern = /^(https?:\/\/)?([\w.-]+)\.([a-zA-Z]{2,6})([/\w.-]*)*\/?$/;
+    const urlPattern = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
     return urlPattern.test(inputValue);
 }
 

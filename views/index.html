@@ -13,52 +13,32 @@
     <div class="card">
       <div class="card-body">
         <h1>URL Shortener</h1>
-        <form action="api/shorturl" method="POST">
+        <form>
           <fieldset>
             <div class="input-group input-group-lg mb-3">
               <input type="text" id="url_input" name="url_input" class="form-control" placeholder="Url to shorten" aria-label="Url to shorten" aria-describedby="shorturl-button" required>
-              <button class="btn btn-outline-secondary rounded-end" type="submit" value="submit" id="shorturl-button" disabled>Make it short!</button>
+              <button class="btn btn-outline-secondary rounded-end" id="shorturl-button" disabled>Make it short!</button>
               <div id="url_inputFeedback" class="invalid-feedback">
-                Please provide a valid link in the format <strong>website.com</strong> or <strong>https://website.com</strong>
+                Please provide a valid link in the format <strong>http://website.com</strong> or <strong>https://website.com</strong>
               </div>
             </div>
           </fieldset>
         </form>
       </div>
-
       <div class="card-footer text-body-secondary text-center">
         <i>Made by <a href="https://github.com/vasll">vasll</a></i>
+      </div>
+    </div>
+
+    <div class="invisible mt-3" id="url_shorten_alert">
+      <div class="alert alert-success fade show" role="alert">
+        The URL <a id="url_long_link"></a> has been shortened at <a id="url_short_link"></a> succesfully!
       </div>
     </div>
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-  <script>
-    const urlInput = document.querySelector('#url_input');
-    const urlButton = document.querySelector('#shorturl-button');
-    
-    function isValidUrl(inputValue) {
-      const urlPattern = /^(https?:\/\/)?([\w.-]+)\.([a-zA-Z]{2,6})([/\w.-]*)*\/?$/;
-      return urlPattern.test(inputValue);
-    }
-    
-    function validateUrlInput() {
-      if (isValidUrl(urlInput.value)) {
-        urlInput.classList.remove('is-invalid');
-        urlInput.classList.add('is-valid');
-        urlButton.disabled = false;
-        urlButton.classList.remove('btn-outline-danger')
-        urlButton.classList.add('btn-outline-success')
-      } else {
-        urlInput.classList.remove('is-valid');
-        urlInput.classList.add('is-invalid');
-        urlButton.disabled = true;
-        urlButton.classList.remove('btn-outline-success')
-        urlButton.classList.add('btn-outline-danger')
-      }
-    }
-    
-    urlInput.addEventListener('input', validateUrlInput);
-  </script>
+  <script src="public/scripts/url_input_validator.js"></script>
+  <script src="public/scripts/ajax_shorturl.js"></script>
 </body>
 </html>

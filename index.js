@@ -9,10 +9,18 @@ require('dotenv').config();
 // Express app
 const app = express();
 
-// Set up CORS, static file serving
+// Set up middleware
 app.use(cors());
 app.use('/public', express.static(`${process.cwd()}/public`));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Set up custom middleware
+const loggerMiddleware = (req, res, next) => {
+	console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
+	next();
+};
+app.use(loggerMiddleware)
 
 // Set up project routes
 app.use('/api', apiRoutes);
