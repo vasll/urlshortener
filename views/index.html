@@ -3,11 +3,6 @@
 <html data-bs-theme="dark">
 <head>
   <title>URL Shortener Microservice | freeCodeCamp.org</title>
-  <link
-    rel="icon"
-    type="image/png"
-    href="https://cdn.freecodecamp.org/universal/favicons/favicon-16x16.png"
-  />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
   <link href="/public/style.css" rel="stylesheet" type="text/css" />
   
@@ -21,15 +16,16 @@
         <form action="api/shorturl" method="POST">
           <fieldset>
             <div class="input-group input-group-lg mb-3">
-              <input type="text" id="url_input" class="form-control" placeholder="Url to shorten" aria-label="Url to shorten" aria-describedby="shorturl-button" required>
-              <button class="btn btn-outline-secondary rounded-end" type="submit" id="shorturl-button" disabled>Make it short!</button>
+              <input type="text" id="url_input" name="url_input" class="form-control" placeholder="Url to shorten" aria-label="Url to shorten" aria-describedby="shorturl-button" required>
+              <button class="btn btn-outline-secondary rounded-end" type="submit" value="submit" id="shorturl-button" disabled>Make it short!</button>
               <div id="url_inputFeedback" class="invalid-feedback">
-                Please provide a valid link in the format <strong>https://website.com</strong>
+                Please provide a valid link in the format <strong>website.com</strong> or <strong>https://website.com</strong>
               </div>
             </div>
           </fieldset>
         </form>
       </div>
+
       <div class="card-footer text-body-secondary text-center">
         <i>Made by <a href="https://github.com/vasll">vasll</a></i>
       </div>
@@ -51,10 +47,14 @@
         urlInput.classList.remove('is-invalid');
         urlInput.classList.add('is-valid');
         urlButton.disabled = false;
+        urlButton.classList.remove('btn-outline-danger')
+        urlButton.classList.add('btn-outline-success')
       } else {
         urlInput.classList.remove('is-valid');
         urlInput.classList.add('is-invalid');
         urlButton.disabled = true;
+        urlButton.classList.remove('btn-outline-success')
+        urlButton.classList.add('btn-outline-danger')
       }
     }
     
