@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch('api/shorturl', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({url_input: urlInput}),
+            body: JSON.stringify({url: urlInput}),
         })
             .then(response => response.json())
             .then(data => {

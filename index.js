@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { inspect } = require('util');
 const mongoose = require('mongoose')
 const apiRoutes = require('./routes/api');
 const frontendRoutes = require('./routes/frontend');
@@ -17,7 +18,11 @@ app.use(express.json());
 
 // Set up custom middleware
 const loggerMiddleware = (req, res, next) => {
-	console.log(`[${new Date().toLocaleString()}] ${req.method} ${req.url}`);
+	console.log(
+	`[${new Date().toLocaleString()}] ${req.method} ${req.url} FROM ${req.ip}\n` +
+	` req.body: ${inspect(req.body)}\n` +
+	` req.params: ${inspect(req.params)}` 
+	);
 	next();
 };
 app.use(loggerMiddleware)
